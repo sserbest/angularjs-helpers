@@ -1,0 +1,50 @@
+**Active class gets toggled on click.**
+
+
+<!DOCTYPE html>
+<html ng-app="myApp">
+  <head lang="en">
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.min.js"></script>
+    <!--<script src="app.js"></script>-->
+    <style>
+      .tiles {
+          display: block;
+          width: 100px;
+          height: 100px;
+          background: #ccc;
+          margin: 5px;
+      }
+
+      .tiles.active {
+          background: #00f;
+      }
+    </style>
+    <script>
+      var myApp = angular.module('myApp',[]);
+
+      function MyCtrl($scope) {
+          $scope.states = [
+              {
+                  stat: 1
+              },
+                 {
+                  stat: 2
+              }
+          ];
+
+          $scope.select = function(item) {
+              $scope.selected = ($scope.selected === item ? null : item);
+          };
+
+           $scope.isActive = function(item) {
+                return $scope.selected === item;
+          };
+      }
+    </script>
+  </head>
+  <body>
+    <div ng-controller="MyCtrl">
+     <div class="tiles" ng-repeat="stat in states" ng-click="select(stat)" ng-class="{active: isActive(stat)}"></div>
+    </div>
+  </body>
+</html>
